@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dxhy.invoice.dao.InvoiceWarningMapper" >
+  <resultMap id="BaseResultMap" type="com.dxhy.invoice.entity.InvoiceWarning" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="taxpayer_code" property="taxpayerCode" jdbcType="VARCHAR" />
+    <result column="store_id" property="storeId" jdbcType="VARCHAR" />
+    <result column="taxdisk_id" property="taxdiskId" jdbcType="VARCHAR" />
+    <result column="invoice_type" property="invoiceType" jdbcType="VARCHAR" />
+    <result column="data_source" property="dataSource" jdbcType="INTEGER" />
+    <result column="invoice_number" property="invoiceNumber" jdbcType="VARCHAR" />
+    <result column="receive_number" property="receiveNumber" jdbcType="VARCHAR" />
+    <result column="start_number" property="startNumber" jdbcType="VARCHAR" />
+    <result column="end_number" property="endNumber" jdbcType="VARCHAR" />
+    <result column="receive_time" property="receiveTime" jdbcType="TIMESTAMP" />
+    <result column="updatetime" property="updatetime" jdbcType="TIMESTAMP" />
+    <result column="warning_number" property="warningNumber" jdbcType="VARCHAR" />
+    <result column="email_address" property="emailAddress" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, taxpayer_code, store_id, taxdisk_id, invoice_type, data_source, invoice_number, 
+    receive_number, start_number, end_number, receive_time, updatetime, warning_number, 
+    email_address
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from invoice_warning
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from invoice_warning
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.dxhy.invoice.entity.InvoiceWarning" >
+    insert into invoice_warning (id, taxpayer_code, store_id, 
+      taxdisk_id, invoice_type, data_source, 
+      invoice_number, receive_number, start_number, 
+      end_number, receive_time, updatetime, 
+      warning_number, email_address)
+    values (#{id,jdbcType=BIGINT}, #{taxpayerCode,jdbcType=VARCHAR}, #{storeId,jdbcType=VARCHAR}, 
+      #{taxdiskId,jdbcType=VARCHAR}, #{invoiceType,jdbcType=VARCHAR}, #{dataSource,jdbcType=INTEGER}, 
+      #{invoiceNumber,jdbcType=VARCHAR}, #{receiveNumber,jdbcType=VARCHAR}, #{startNumber,jdbcType=VARCHAR}, 
+      #{endNumber,jdbcType=VARCHAR}, #{receiveTime,jdbcType=TIMESTAMP}, #{updatetime,jdbcType=TIMESTAMP}, 
+      #{warningNumber,jdbcType=VARCHAR}, #{emailAddress,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.dxhy.invoice.entity.InvoiceWarning" >
+    insert into invoice_warning
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="taxpayerCode != null" >
+        taxpayer_code,
+      </if>
+      <if test="storeId != null" >
+        store_id,
+      </if>
+      <if test="taxdiskId != null" >
+        taxdisk_id,
+      </if>
+      <if test="invoiceType != null" >
+        invoice_type,
+      </if>
+      <if test="dataSource != null" >
+        data_source,
+      </if>
+      <if test="invoiceNumber != null" >
+        invoice_number,
+      </if>
+      <if test="receiveNumber != null" >
+        receive_number,
+      </if>
+      <if test="startNumber != null" >
+        start_number,
+      </if>
+      <if test="endNumber != null" >
+        end_number,
+      </if>
+      <if test="receiveTime != null" >
+        receive_time,
+      </if>
+      <if test="updatetime != null" >
+        updatetime,
+      </if>
+      <if test="warningNumber != null" >
+        warning_number,
+      </if>
+      <if test="emailAddress != null" >
+        email_address,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="taxpayerCode != null" >
+        #{taxpayerCode,jdbcType=VARCHAR},
+      </if>
+      <if test="storeId != null" >
+        #{storeId,jdbcType=VARCHAR},
+      </if>
+      <if test="taxdiskId != null" >
+        #{taxdiskId,jdbcType=VARCHAR},
+      </if>
+      <if test="invoiceType != null" >
+        #{invoiceType,jdbcType=VARCHAR},
+      </if>
+      <if test="dataSource != null" >
+        #{dataSource,jdbcType=INTEGER},
+      </if>
+      <if test="invoiceNumber != null" >
+        #{invoiceNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="receiveNumber != null" >
+        #{receiveNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="startNumber != null" >
+        #{startNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="endNumber != null" >
+        #{endNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="receiveTime != null" >
+        #{receiveTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null" >
+        #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="warningNumber != null" >
+        #{warningNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="emailAddress != null" >
+        #{emailAddress,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.dxhy.invoice.entity.InvoiceWarning" >
+    update invoice_warning
+    <set >
+      <if test="taxpayerCode != null" >
+        taxpayer_code = #{taxpayerCode,jdbcType=VARCHAR},
+      </if>
+      <if test="storeId != null" >
+        store_id = #{storeId,jdbcType=VARCHAR},
+      </if>
+      <if test="taxdiskId != null" >
+        taxdisk_id = #{taxdiskId,jdbcType=VARCHAR},
+      </if>
+      <if test="invoiceType != null" >
+        invoice_type = #{invoiceType,jdbcType=VARCHAR},
+      </if>
+      <if test="dataSource != null" >
+        data_source = #{dataSource,jdbcType=INTEGER},
+      </if>
+      <if test="invoiceNumber != null" >
+        invoice_number = #{invoiceNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="receiveNumber != null" >
+        receive_number = #{receiveNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="startNumber != null" >
+        start_number = #{startNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="endNumber != null" >
+        end_number = #{endNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="receiveTime != null" >
+        receive_time = #{receiveTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null" >
+        updatetime = #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="warningNumber != null" >
+        warning_number = #{warningNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="emailAddress != null" >
+        email_address = #{emailAddress,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.dxhy.invoice.entity.InvoiceWarning" >
+    update invoice_warning
+    set taxpayer_code = #{taxpayerCode,jdbcType=VARCHAR},
+      store_id = #{storeId,jdbcType=VARCHAR},
+      taxdisk_id = #{taxdiskId,jdbcType=VARCHAR},
+      invoice_type = #{invoiceType,jdbcType=VARCHAR},
+      data_source = #{dataSource,jdbcType=INTEGER},
+      invoice_number = #{invoiceNumber,jdbcType=VARCHAR},
+      receive_number = #{receiveNumber,jdbcType=VARCHAR},
+      start_number = #{startNumber,jdbcType=VARCHAR},
+      end_number = #{endNumber,jdbcType=VARCHAR},
+      receive_time = #{receiveTime,jdbcType=TIMESTAMP},
+      updatetime = #{updatetime,jdbcType=TIMESTAMP},
+      warning_number = #{warningNumber,jdbcType=VARCHAR},
+      email_address = #{emailAddress,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

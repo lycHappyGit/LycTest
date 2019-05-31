@@ -18,7 +18,7 @@ public class MailTest {
 
 	public static void main(String[] args) throws Exception{
 
-		send("this is lyc test mail6 liufeiyu to lyc and contail null");
+		send("this is lyc test mail7 liufeiyu to lyc and contail null");
 	}
 
 	public static void send(String content) {
@@ -30,12 +30,12 @@ public class MailTest {
 			Session session = Session.getInstance(props);
 			session.setDebug(true);
 			Message message = new MimeMessage(session);
-			message.setFrom(new InternetAddress("liufeiyu6@163.com"));
+			message.setFrom(new InternetAddress("dzfp@push.ele-cloud.com"));
 			message.setSentDate(new Date());
 			message.setSubject("hello mail");
 			message.setContent(content, "text/html;charset=UTF-8");
 			Transport tran = session.getTransport();
-			tran.connect("smtp.163.com",25,"liufeiyu6@163.com","llc19910416");
+			tran.connect("smtpdm.aliyun.com",25,"dzfp@push.ele-cloud.com","dxhy123456");
 
 			InternetAddress address1 = new InternetAddress("603893812@qq.com");
 //			InternetAddress address3 = new InternetAddress("liuyingchao@ele-cloud.com");

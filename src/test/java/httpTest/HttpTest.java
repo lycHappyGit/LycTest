@@ -63,21 +63,45 @@ public class HttpTest {
     }
 
     @Test
-    public void test(){
+    public void test() throws UnsupportedEncodingException {
 
-        String url = "http://alarm.bosszhipin.com/groupalarm/?group=caiwu&media=mail&subject=tickectwaring&message=%s";
-        String message = "余票张数不足300张!";
-        try {
-            message = URLEncoder.encode(message,"utf-8");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        url = String.format(url, message);
-        System.out.println("url编码过后为:" + url);
+        System.out.println("011001700112".substring(10, 12));
     }
 
     @Test
     public void post(){
+
+        String url = "http://localhost:8080/bb";
+        DefaultHttpClient client = new DefaultHttpClient();
+
+        String str = "";
+        try {
+            List<BasicNameValuePair> param = new ArrayList<BasicNameValuePair>();
+            param.add(new BasicNameValuePair("name", "urlEncodedFormEntity lisi"));
+            param.add(new BasicNameValuePair("like", "玩游戏!"));
+
+            HttpEntity entity = new UrlEncodedFormEntity(param, "utf-8");
+            HttpPost httpPost = new HttpPost(url);
+            httpPost.setEntity(entity);
+            HttpResponse response = client.execute(httpPost);
+            /**请求发送成功，并得到响应**/
+            if (response.getStatusLine().getStatusCode() == HttpStatus.SC_OK) {
+                /**读取服务器返回过来的json字符串数据**/
+                str = EntityUtils.toString(response.getEntity());
+            } else {
+                System.out.println("get请求提交失败:" + url);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        finally {
+            client.getConnectionManager().closeExpiredConnections();
+            client.getConnectionManager().closeIdleConnections(60, TimeUnit.SECONDS);
+        }
+    }
+
+    @Test
+    public void post2(){
 
         String url = "http://localhost:8080/bb";
         DefaultHttpClient client = new DefaultHttpClient();
@@ -132,6 +156,7 @@ public class HttpTest {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
         finally {
             client.getConnectionManager().closeExpiredConnections();
             client.getConnectionManager().closeIdleConnections(60, TimeUnit.SECONDS);

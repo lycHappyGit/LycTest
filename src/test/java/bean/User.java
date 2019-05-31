@@ -9,6 +9,8 @@ public class User {
 
     private String likes;
 
+    public User(){}
+
     public User(String name, String likes) {
         this.name = name;
         this.likes = likes;

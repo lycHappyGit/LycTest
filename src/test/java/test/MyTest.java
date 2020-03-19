@@ -3,7 +3,9 @@ package test;
 import bean.FPKJXX_FPTXX;
 import bean.FPKJXX_XMXX;
 import bean.REQUEST_FPKJXX;
+import bean.User;
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.google.gson.Gson;
 import enumtest.QueueType;
 import org.apache.commons.codec.digest.DigestUtils;
@@ -15,6 +17,8 @@ import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
 import java.io.*;
 import java.math.BigDecimal;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.security.MessageDigest;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
@@ -267,6 +271,30 @@ public class MyTest {
             e.printStackTrace();
         }
         return appSec;
+    }
+
+    @Test
+    public void test() {
+        User user1 = new User("aa", "sing");
+        User user2 = new User("bb", "play");
+        ArrayList<User> users = new ArrayList<>();
+        users.add(user1);
+        users.add(user2);
+        System.out.println(JSON.toJSON(users));
+        users.get(users.size()-1).setLikes("");
+        System.out.println(JSON.toJSON(users));
+
+    }
+
+    @Test
+    public void test30() throws URISyntaxException {
+
+       String s = "https://localhost:28443/dgs/api_686979482438860800124104";
+        URI uri = new URI(s);
+        String host = uri.getHost();
+        int port = uri.getPort();
+        System.out.println("--------------" + uri.getScheme() + "://" + host + ":" + port);
+
     }
 
 

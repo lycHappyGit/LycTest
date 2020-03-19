@@ -180,5 +180,14 @@
 			<artifactId>lombok</artifactId>
 			<version>1.16.18</version>
 		</dependency>
+
+		<dependency>
+			<groupId>com.mlamp.api.gateway</groupId>
+			<artifactId>sdk-core-java</artifactId>
+			<version>1.0</version>
+			<scope>system</scope>
+			<systemPath>${project.basedir}/lib/sdk-core-java-1.0-SNAPSHOT.jar</systemPath>
+		</dependency>
+
 	</dependencies>
 </project>

@@ -24,13 +24,13 @@
         </javaTypeResolver>  
           
         <!-- 生成实体类地址 -->    
-        <javaModelGenerator targetPackage="com.dxhy.invoice.entity" targetProject="${project}" > </javaModelGenerator>
+        <javaModelGenerator targetPackage="com.mlamp.rcsc.model" targetProject="${project}" > </javaModelGenerator>
           
         <!-- 生成mapxml文件 -->  
-        <sqlMapGenerator targetPackage="com.dxhy.invoice.dao" targetProject="${project}" >  </sqlMapGenerator>
-          
+        <sqlMapGenerator targetPackage="com.mlamp.rcsc.dao" targetProject="${project}" >  </sqlMapGenerator>
+
         <!-- 生成mapxml对应client，也就是接口dao -->      
-        <javaClientGenerator targetPackage="com.dxhy.invoice.dao" targetProject="${project}" type="XMLMAPPER" ></javaClientGenerator>
+        <javaClientGenerator targetPackage="com.mlamp.rcsc.dao" targetProject="${project}" type="XMLMAPPER" ></javaClientGenerator>
           
         <!-- 配置表信息
         <table schema="${jdbc_user}" tableName="s_user"  
@@ -44,8 +44,11 @@
         	enableSelectByExample="false" enableUpdateByExample="false">
         </table>
        -->
-       <table tableName="invoice_warning" enableCountByExample="false"  enableDeleteByExample="false"
+       <table tableName="rc_gxml_template" enableCountByExample="false"  enableDeleteByExample="false"
               enableSelectByExample="false" enableUpdateByExample="false">
        </table>
+        <table tableName="rc_config" enableCountByExample="false"  enableDeleteByExample="false"
+               enableSelectByExample="false" enableUpdateByExample="false">
+        </table>
     </context>
 </generatorConfiguration>  

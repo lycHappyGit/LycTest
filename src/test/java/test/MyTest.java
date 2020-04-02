@@ -3,16 +3,13 @@ package test;
 import bean.FPKJXX_FPTXX;
 import bean.FPKJXX_XMXX;
 import bean.REQUEST_FPKJXX;
+import bean.User;
 import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.google.gson.Gson;
-import com.google.gson.JsonObject;
 import enumtest.QueueType;
-import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.junit.Test;
-import util.DateUtil;
 import util.JavaCompilerUtil;
 import util.Money2CNUtil;
 
@@ -20,12 +17,14 @@ import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
 import java.io.*;
 import java.math.BigDecimal;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.security.MessageDigest;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
-@Slf4j
+
 public class MyTest {
 
 
@@ -76,35 +75,17 @@ public class MyTest {
     }
 
     @Test
-    public void test3() throws UnsupportedEncodingException {
-        String s = "我";
-        char c = '我';
-        String s1 = Integer.toHexString(c & 0xffff);
-        System.out.println(s1);
+    public void test3() {
 
-
+        String money2cn = Money2CNUtil.money2CN(new BigDecimal("-200303123.12"));
+        System.out.println(money2cn);
     }
 
     @Test
     public void test5() {
-        String s = "{\"data\": [{\"category\": \"table\", \"name\": \"表权限\", \"authTrees\": [{\"id\": 10, \"pid\": 0, \"nameEn\": \"\", \"nameCn\": \"业务数据目录\", \"type\": \"dir\", \"desc\": \"阿凡达是否\", \"subNum\": 0, \"isHaveAuth\": false, \"children\": [{\"id\": 11, \"pid\": 10, \"nameEn\": \"\", \"nameCn\": \"95598业务支持系统\", \"type\": \"dir\", \"desc\": \"\", \"subNum\": 0, \"isHaveAuth\": false, \"children\": [{\"id\": 12, \"pid\": 11, \"nameEn\": \"\", \"nameCn\": \"95598普遍服务\", \"type\": \"dir\", \"desc\": \"\", \"subNum\": 0, \"isHaveAuth\": false, \"children\": [{\"id\": 13, \"pid\": 12, \"nameEn\": \"\", \"nameCn\": \"业务咨询\", \"type\": \"db\", \"desc\": \"这个有描述么\", \"subNum\": 0, \"isHaveAuth\": false, \"children\": [] }, {\"id\": 14, \"pid\": 12, \"nameEn\": \"\", \"nameCn\": \"故障报修\", \"type\": \"db\", \"desc\": \"\", \"subNum\": 0, \"isHaveAuth\": false, \"children\": [] }, {\"id\": 15, \"pid\": 12, \"nameEn\": \"\", \"nameCn\": \"投诉\", \"type\": \"db\", \"desc\": \"\", \"subNum\": 0, \"isHaveAuth\": false, \"children\": [] }, {\"id\": 16, \"pid\": 12, \"nameEn\": \"\", \"nameCn\": \"举报\", \"type\": \"db\", \"desc\": \"\", \"subNum\": 0, \"isHaveAuth\": false, \"children\": [] }, {\"id\": 17, \"pid\": 12, \"nameEn\": \"\", \"nameCn\": \"意见\", \"type\": \"db\", \"desc\": \"\", \"subNum\": 0, \"isHaveAuth\": false, \"children\": [] }, {\"id\": 18, \"pid\": 12, \"nameEn\": \"\", \"nameCn\": \"建议333\", \"type\": \"db\", \"desc\": \"\", \"subNum\": 0, \"isHaveAuth\": false, \"children\": [] }] }, {\"id\": 20, \"pid\": 11, \"nameEn\": \"\", \"nameCn\": \"重要客户服务\", \"type\": \"dir\", \"desc\": \"\", \"subNum\": 0, \"isHaveAuth\": false, \"children\": [{\"id\": 49, \"pid\": 20, \"nameEn\": \"\", \"nameCn\": \"服务\", \"type\": \"db\", \"desc\": \"1\", \"subNum\": 0, \"isHaveAuth\": false, \"children\": [] }] }, {\"id\": 21, \"pid\": 11, \"nameEn\": \"\", \"nameCn\": \"服务申请\", \"type\": \"dir\", \"desc\": \"\", \"subNum\": 0, \"isHaveAuth\": false, \"children\": [{\"id\": 50, \"pid\": 21, \"nameEn\": \"\", \"nameCn\": \"服务申请\", \"type\": \"db\", \"desc\": \"无\", \"subNum\": 0, \"isHaveAuth\": false, \"children\": [] }] }, {\"id\": 22, \"pid\": 11, \"nameEn\": \"\", \"nameCn\": \"回访管理\", \"type\": \"dir\", \"desc\": \"\", \"subNum\": 0, \"isHaveAuth\": false, \"children\": [{\"id\": 51, \"pid\": 22, \"nameEn\": \"\", \"nameCn\": \"回访管理\", \"type\": \"db\", \"desc\": \"无\", \"subNum\": 0, \"isHaveAuth\": false, \"children\": [] }] }] }, {\"id\": 34, \"pid\": 10, \"nameEn\": \"\", \"nameCn\": \"营销项目管理系统1\", \"type\": \"dir\", \"desc\": \"\", \"subNum\": 0, \"isHaveAuth\": false, \"children\": [{\"id\": 45, \"pid\": 34, \"nameEn\": \"\", \"nameCn\": \"营销系统\", \"type\": \"db\", \"desc\": \"无\", \"subNum\": 0, \"isHaveAuth\": false, \"children\": [] }, {\"id\": 79, \"pid\": 34, \"nameEn\": \"\", \"nameCn\": \"新建系统\", \"type\": \"db\", \"desc\": \"\", \"subNum\": 0, \"isHaveAuth\": false, \"children\": [] }] }, {\"id\": 57, \"pid\": 10, \"nameEn\": \"\", \"nameCn\": \"财务管理系统\", \"type\": \"dir\", \"desc\": \"无\", \"subNum\": 0, \"isHaveAuth\": false, \"children\": [{\"id\": 65, \"pid\": 57, \"nameEn\": \"\", \"nameCn\": \"财务管理\", \"type\": \"db\", \"desc\": \"无\", \"subNum\": 0, \"isHaveAuth\": false, \"children\": [] }] }, {\"id\": 99, \"pid\": 10, \"nameEn\": \"\", \"nameCn\": \"目录1\", \"type\": \"dir\", \"desc\": \"\", \"subNum\": 0, \"isHaveAuth\": false, \"children\": [{\"id\": 101, \"pid\": 99, \"nameEn\": \"\", \"nameCn\": \"数据库2\", \"type\": \"db\", \"desc\": \"22\", \"subNum\": 0, \"isHaveAuth\": false, \"children\": [] }, {\"id\": 103, \"pid\": 99, \"nameEn\": \"\", \"nameCn\": \"目录1-1\", \"type\": \"dir\", \"desc\": \"\", \"subNum\": 0, \"isHaveAuth\": false, \"children\": [{\"id\": 105, \"pid\": 103, \"nameEn\": \"\", \"nameCn\": \"经费管理\", \"type\": \"db\", \"desc\": \"经费管理\", \"subNum\": 0, \"isHaveAuth\": false, \"children\": [] }, {\"id\": 107, \"pid\": 103, \"nameEn\": \"\", \"nameCn\": \"旅费管理\", \"type\": \"db\", \"desc\": \"\", \"subNum\": 0, \"isHaveAuth\": false, \"children\": [] }] }] }, {\"id\": 134, \"pid\": 10, \"nameEn\": \"\", \"nameCn\": \"测试\", \"type\": \"dir\", \"desc\": \"测试\", \"subNum\": 0, \"isHaveAuth\": false, \"children\": [] }, {\"id\": 139, \"pid\": 10, \"nameEn\": \"\", \"nameCn\": \"test\", \"type\": \"db\", \"desc\": \"test\", \"subNum\": 0, \"isHaveAuth\": false, \"children\": [] }, {\"id\": 150, \"pid\": 10, \"nameEn\": \"\", \"nameCn\": \"政协\", \"type\": \"dir\", \"desc\": \"\", \"subNum\": 0, \"isHaveAuth\": false, \"children\": [] }, {\"id\": 151, \"pid\": 10, \"nameEn\": \"\", \"nameCn\": \"人大\", \"type\": \"dir\", \"desc\": \"\", \"subNum\": 0, \"isHaveAuth\": false, \"children\": [] }] }, {\"id\": 53, \"pid\": 0, \"nameEn\": \"\", \"nameCn\": \"宽表业务系统数据\", \"type\": \"dir\", \"desc\": \"数仓模型生成业务宽表\", \"subNum\": 0, \"isHaveAuth\": false, \"children\": [{\"id\": 55, \"pid\": 53, \"nameEn\": \"\", \"nameCn\": \"常用宽表\", \"type\": \"db\", \"desc\": \"无\", \"subNum\": 0, \"isHaveAuth\": false, \"children\": [] }, {\"id\": 56, \"pid\": 53, \"nameEn\": \"\", \"nameCn\": \"不常用宽表\", \"type\": \"db\", \"desc\": \"无\", \"subNum\": 0, \"isHaveAuth\": false, \"children\": [] }] }, {\"id\": 69, \"pid\": 0, \"nameEn\": \"\", \"nameCn\": \"测试业务系统\", \"type\": \"dir\", \"desc\": \"大苏打大\", \"subNum\": 0, \"isHaveAuth\": false, \"children\": [{\"id\": 131, \"pid\": 69, \"nameEn\": \"\", \"nameCn\": \"test\", \"type\": \"db\", \"desc\": \"\", \"subNum\": 0, \"isHaveAuth\": false, \"children\": [] }] }, {\"id\": 87, \"pid\": 0, \"nameEn\": \"\", \"nameCn\": \"测试系统\", \"type\": \"dir\", \"desc\": \"编辑权限管理\\n\", \"subNum\": 0, \"isHaveAuth\": false, \"children\": [{\"id\": 89, \"pid\": 87, \"nameEn\": \"\", \"nameCn\": \"测试系统2\", \"type\": \"dir\", \"desc\": \"\", \"subNum\": 0, \"isHaveAuth\": false, \"children\": [{\"id\": 91, \"pid\": 89, \"nameEn\": \"\", \"nameCn\": \"测试系统3\", \"type\": \"dir\", \"desc\": \"\", \"subNum\": 0, \"isHaveAuth\": false, \"children\": [{\"id\": 93, \"pid\": 91, \"nameEn\": \"\", \"nameCn\": \"系统1\", \"type\": \"db\", \"desc\": \"\", \"subNum\": 0, \"isHaveAuth\": false, \"children\": [] }] }, {\"id\": 112, \"pid\": 89, \"nameEn\": \"\", \"nameCn\": \"测试系统3\", \"type\": \"dir\", \"desc\": \"asdsf\", \"subNum\": 0, \"isHaveAuth\": false, \"children\": [] }] }] }, {\"id\": 108, \"pid\": 0, \"nameEn\": \"\", \"nameCn\": \"string\", \"type\": \"dir\", \"desc\": \"string\", \"subNum\": 0, \"isHaveAuth\": false, \"children\": [{\"id\": 111, \"pid\": 108, \"nameEn\": \"\", \"nameCn\": \"test\", \"type\": \"db\", \"desc\": \"测试\", \"subNum\": 0, \"isHaveAuth\": false, \"children\": [] }, {\"id\": 158, \"pid\": 108, \"nameEn\": \"\", \"nameCn\": \"hello-test\", \"type\": \"db\", \"desc\": \"\", \"subNum\": 0, \"isHaveAuth\": false, \"children\": [] }] }, {\"id\": 113, \"pid\": 0, \"nameEn\": \"\", \"nameCn\": \"行业分类\", \"type\": \"dir\", \"desc\": \"\", \"subNum\": 0, \"isHaveAuth\": false, \"children\": [{\"id\": 114, \"pid\": 113, \"nameEn\": \"\", \"nameCn\": \"金融\", \"type\": \"dir\", \"desc\": \"\", \"subNum\": 0, \"isHaveAuth\": false, \"children\": [{\"id\": 118, \"pid\": 114, \"nameEn\": \"\", \"nameCn\": \"金融111db\", \"type\": \"db\", \"desc\": \"\", \"subNum\": 0, \"isHaveAuth\": false, \"children\": [] }] }, {\"id\": 115, \"pid\": 113, \"nameEn\": \"\", \"nameCn\": \"公安\", \"type\": \"dir\", \"desc\": \"的\", \"subNum\": 0, \"isHaveAuth\": false, \"children\": [] }, {\"id\": 116, \"pid\": 113, \"nameEn\": \"\", \"nameCn\": \"政府\", \"type\": \"dir\", \"desc\": \"\", \"subNum\": 0, \"isHaveAuth\": false, \"children\": [] }, {\"id\": 117, \"pid\": 113, \"nameEn\": \"\", \"nameCn\": \"工业0527\", \"type\": \"dir\", \"desc\": \"测试权限专用，勿删\", \"subNum\": 0, \"isHaveAuth\": false, \"children\": [{\"id\": 119, \"pid\": 117, \"nameEn\": \"\", \"nameCn\": \"工业db\", \"type\": \"db\", \"desc\": \"啊\", \"subNum\": 0, \"isHaveAuth\": false, \"children\": [] }, {\"id\": 120, \"pid\": 117, \"nameEn\": \"\", \"nameCn\": \"工业222mmmm\", \"type\": \"db\", \"desc\": \"为了测试角色授权\", \"subNum\": 0, \"isHaveAuth\": false, \"children\": [] }, {\"id\": 121, \"pid\": 117, \"nameEn\": \"\", \"nameCn\": \"工业333OOO\", \"type\": \"db\", \"desc\": \"勿删，测试权限用\", \"subNum\": 0, \"isHaveAuth\": false, \"children\": [] }, {\"id\": 122, \"pid\": 117, \"nameEn\": \"\", \"nameCn\": \"工业555test\", \"type\": \"db\", \"desc\": \"测试权限\", \"subNum\": 0, \"isHaveAuth\": false, \"children\": [] }, {\"id\": 123, \"pid\": 117, \"nameEn\": \"\", \"nameCn\": \"工业222\", \"type\": \"db\", \"desc\": \"\", \"subNum\": 0, \"isHaveAuth\": false, \"children\": [] }, {\"id\": 124, \"pid\": 117, \"nameEn\": \"\", \"nameCn\": \"工业66666\", \"type\": \"db\", \"desc\": \"测试权限!!!!!!!!\", \"subNum\": 0, \"isHaveAuth\": false, \"children\": [] }, {\"id\": 125, \"pid\": 117, \"nameEn\": \"\", \"nameCn\": \"工业777db\", \"type\": \"db\", \"desc\": \"7654321356\", \"subNum\": 0, \"isHaveAuth\": false, \"children\": [] }, {\"id\": 147, \"pid\": 117, \"nameEn\": \"\", \"nameCn\": \"工业4.0\", \"type\": \"dir\", \"desc\": \"\", \"subNum\": 0, \"isHaveAuth\": false, \"children\": [{\"id\": 148, \"pid\": 147, \"nameEn\": \"\", \"nameCn\": \"2025\", \"type\": \"dir\", \"desc\": \"\", \"subNum\": 0, \"isHaveAuth\": false, \"children\": [{\"id\": 149, \"pid\": 148, \"nameEn\": \"\", \"nameCn\": \"中国创造\", \"type\": \"db\", \"desc\": \"\", \"subNum\": 0, \"isHaveAuth\": false, \"children\": [] }] }] }] }, {\"id\": 126, \"pid\": 113, \"nameEn\": \"\", \"nameCn\": \"IT\", \"type\": \"dir\", \"desc\": \"all in AI\", \"subNum\": 0, \"isHaveAuth\": false, \"children\": [{\"id\": 127, \"pid\": 126, \"nameEn\": \"\", \"nameCn\": \"bigData\", \"type\": \"db\", \"desc\": \"大大大大大数据\", \"subNum\": 0, \"isHaveAuth\": false, \"children\": [] }] }] }, {\"id\": 129, \"pid\": 0, \"nameEn\": \"\", \"nameCn\": \"测试11\", \"type\": \"dir\", \"desc\": \"测试11\", \"subNum\": 0, \"isHaveAuth\": false, \"children\": [{\"id\": 130, \"pid\": 129, \"nameEn\": \"\", \"nameCn\": \"测试111\", \"type\": \"db\", \"desc\": \"测试\", \"subNum\": 0, \"isHaveAuth\": false, \"children\": [] }, {\"id\": 132, \"pid\": 129, \"nameEn\": \"\", \"nameCn\": \"金融\", \"type\": \"dir\", \"desc\": \"\", \"subNum\": 0, \"isHaveAuth\": false, \"children\": [] }, {\"id\": 133, \"pid\": 129, \"nameEn\": \"\", \"nameCn\": \"测试11\", \"type\": \"db\", \"desc\": \"\", \"subNum\": 0, \"isHaveAuth\": false, \"children\": [] }, {\"id\": 155, \"pid\": 129, \"nameEn\": \"\", \"nameCn\": \"skfndgd\", \"type\": \"dir\", \"desc\": \"adsfdsf\", \"subNum\": 0, \"isHaveAuth\": false, \"children\": [{\"id\": 156, \"pid\": 155, \"nameEn\": \"\", \"nameCn\": \"kkkkkk\", \"type\": \"dir\", \"desc\": \"kkkkk\", \"subNum\": 0, \"isHaveAuth\": false, \"children\": [{\"id\": 157, \"pid\": 156, \"nameEn\": \"\", \"nameCn\": \"db\", \"type\": \"db\", \"desc\": \"db\", \"subNum\": 0, \"isHaveAuth\": false, \"children\": [] }] }] }] }, {\"id\": 143, \"pid\": 0, \"nameEn\": \"\", \"nameCn\": \"政协\", \"type\": \"dir\", \"desc\": \"政治协商会议的规章制度、组织机构建设和发展，以及工作职责等相关信息\", \"subNum\": 0, \"isHaveAuth\": false, \"children\": [{\"id\": 144, \"pid\": 143, \"nameEn\": \"\", \"nameCn\": \"政协管理制度\", \"type\": \"db\", \"desc\": \"政协管理制度包括：各级政治协商会议依法行使参政、监督权利所应该遵循的规章和制度，以及为了保证政协履行职能所制定的各项法律、法规和管理制度\", \"subNum\": 0, \"isHaveAuth\": false, \"children\": [] }, {\"id\": 145, \"pid\": 143, \"nameEn\": \"\", \"nameCn\": \"政府组织机构\", \"type\": \"db\", \"desc\": \"\", \"subNum\": 0, \"isHaveAuth\": false, \"children\": [] }, {\"id\": 146, \"pid\": 143, \"nameEn\": \"\", \"nameCn\": \"政协工作\", \"type\": \"db\", \"desc\": \"\", \"subNum\": 0, \"isHaveAuth\": false, \"children\": [] }] }, {\"id\": 152, \"pid\": 0, \"nameEn\": \"\", \"nameCn\": \"人大\", \"type\": \"dir\", \"desc\": \"\", \"subNum\": 0, \"isHaveAuth\": false, \"children\": [{\"id\": 153, \"pid\": 152, \"nameEn\": \"\", \"nameCn\": \"测试\", \"type\": \"db\", \"desc\": \"\", \"subNum\": 0, \"isHaveAuth\": false, \"children\": [] }] }, {\"id\": 154, \"pid\": 0, \"nameEn\": \"\", \"nameCn\": \"测试\", \"type\": \"dir\", \"desc\": \"\", \"subNum\": 0, \"isHaveAuth\": false, \"children\": [] }] }], \"statusCode\": 200, \"message\": \"success\"}";
-        JSONObject jsonObject = JSON.parseObject(s);
-        JSONArray array = jsonObject.getJSONArray("data");
-        JSONArray authTrees = ((JSONObject) array.get(0)).getJSONArray("authTrees");
-        int i = 1;
-        dg(authTrees, i);
-    }
-
-    private void dg(JSONArray array, int i){
-        for(Object obj : array){
-            JSONObject json = (JSONObject)obj;
-            String nameCn = json.getString("nameCn");
-            System.out.println(i++ + "*\t" + nameCn);
-            JSONArray array2 = json.getJSONArray("children");
-            if(array != null){
-                dg(array2, i);
-            }
-        }
+        DecimalFormat shotDf = new DecimalFormat("#.00");
+        String s = shotDf.format(Double.parseDouble("50.00"));
+        System.out.println(s);
     }
 
     @Test
@@ -254,7 +235,10 @@ public class MyTest {
     @Test
     public void test18() throws Exception {
 
-        System.out.println(!"3".equals(null));
+        byte[] bytes = DigestUtils.md5("012345678910000008".getBytes("utf-8"));
+        byte[] encode = Base64.getEncoder().encode(bytes);
+        String s = new String(encode, "utf-8");
+        System.out.println(s);
     }
 
     @Test
@@ -264,9 +248,14 @@ public class MyTest {
 //        map.put("list", list);
 //        list.add("1");
 //        System.out.println(JSON.toJSONString(map));
-        List<String> taskList = null;
-        String s = JSON.toJSONString(taskList);
-        System.out.println(s);
+        String s = "123456";
+        MessageDigest md5 = MessageDigest.getInstance("MD5");
+        byte[] digest = md5.digest(s.getBytes("utf-8"));
+        String s1 = new String(digest, "utf-8");
+        byte[] encode = Base64.getEncoder().encode(digest);
+        String s2 = new String(encode, "utf-8");
+        System.out.println(s1);
+        System.out.println(s2);
     }
 
     public static String signString(String data) {
@@ -285,14 +274,28 @@ public class MyTest {
     }
 
     @Test
-    public void test(){
+    public void test() {
+        User user1 = new User("aa", "sing");
+        User user2 = new User("bb", "play");
+        ArrayList<User> users = new ArrayList<>();
+        users.add(user1);
+        users.add(user2);
+        System.out.println(JSON.toJSON(users));
+        users.get(users.size()-1).setLikes("");
+        System.out.println(JSON.toJSON(users));
 
-        String s = "{\"fileOptions\":{\"encoding\":\"UTF-8\",\"exportFileMaxrow\":99,\"maxfileFetchresultSize\":100000,\"quoteType\":\"none\",\"newlineCharacter\":\"CRLF\",\"quote\":\"\",\"maxTimesPerDay\":10,\"dataKeeptime\":2592000,\"dataKeepEndDate\":\"2020-02-13\",\"delimiter\":\",\",\"delimiterType\":\"comma\",\"maxTimesTotal\":100,\"fileFormat\":\"CSV\"},\"select\":[{\"dataType\":\"datetime\",\"name\":\"start_time\",\"alias\":\"开始时间\",\"table\":\"t_escheduler_error_command\"},{\"dataType\":\"datetime\",\"name\":\"schedule_time\",\"alias\":\"预期运行时间\",\"table\":\"t_escheduler_error_command\"},{\"dataType\":\"tinyint\",\"name\":\"task_depend_type\",\"alias\":\"节点依赖类型\",\"table\":\"t_escheduler_error_command\"},{\"dataType\":\"int\",\"name\":\"process_instance_priority\",\"alias\":\"流程实例优先级：0 Highest,1 High,2 Medium,3 Low,4 Lowest\",\"table\":\"t_escheduler_error_command\"},{\"dataType\":\"int\",\"name\":\"id\",\"alias\":\"主键\",\"table\":\"t_escheduler_error_command\"},{\"dataType\":\"text\",\"name\":\"dependence\",\"alias\":\"依赖字段\",\"table\":\"t_escheduler_error_command\"},{\"dataType\":\"tinyint\",\"name\":\"warning_type\",\"alias\":\"告警类型\",\"table\":\"t_escheduler_error_command\"},{\"dataType\":\"datetime\",\"name\":\"update_time\",\"alias\":\"更新时间\",\"table\":\"t_escheduler_error_command\"},{\"dataType\":\"tinyint\",\"name\":\"failure_strategy\",\"alias\":\"失败策略：0结束，1继续\",\"table\":\"t_escheduler_error_command\"},{\"dataType\":\"int\",\"name\":\"executor_id\",\"alias\":\"命令执行者\",\"table\":\"t_escheduler_error_command\"},{\"dataType\":\"text\",\"name\":\"message\",\"alias\":\"执行信息\",\"table\":\"t_escheduler_error_command\"},{\"dataType\":\"int\",\"name\":\"warning_group_id\",\"alias\":\"告警组\",\"table\":\"t_escheduler_error_command\"},{\"dataType\":\"int\",\"name\":\"process_definition_id\",\"alias\":\"流程定义id\",\"table\":\"t_escheduler_error_command\"},{\"dataType\":\"text\",\"name\":\"command_param\",\"alias\":\"命令的参数（json格式）\",\"table\":\"t_escheduler_error_command\"},{\"dataType\":\"int\",\"name\":\"worker_group_id\",\"alias\":\"任务指定运行的worker分组\",\"table\":\"t_escheduler_error_command\"},{\"dataType\":\"tinyint\",\"name\":\"command_type\",\"alias\":\"命令类型：0 启动工作流,1 从当前节点开始执行,2 恢复被容错的工作流,3 恢复暂停流程,4 从失败节点开始执行,5 补数,6 调度,7 重跑,8 暂停,9 停止,10 恢复等待线程\",\"table\":\"t_escheduler_error_command\"}],\"connection\":{\"database\":\"escheduler\",\"password\":\"mrst123456\",\"connectionUrl\":\"jdbc:mysql://172.21.1.165:3306\",\"dbType\":\"mysql\",\"username\":\"root\"},\"from\":{\"join\":[],\"table\":\"t_escheduler_error_command\"},\"where\":{\"start_time\":{}},\"cmd\":\"dataBySource\"}";
-        JSONObject jsonObject = JSON.parseObject(s);
-        JSONObject where = jsonObject.getJSONObject("where");
-        where.put("rowPriority", "noAuth");
-        jsonObject.put("where", where);
-        System.out.println(jsonObject.toJSONString());
     }
+
+    @Test
+    public void test30() throws URISyntaxException {
+
+       String s = "https://localhost:28443/dgs/api_686979482438860800124104";
+        URI uri = new URI(s);
+        String host = uri.getHost();
+        int port = uri.getPort();
+        System.out.println("--------------" + uri.getScheme() + "://" + host + ":" + port);
+
+    }
+
 
 }

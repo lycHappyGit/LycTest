@@ -12,13 +12,16 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.ContentType;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.entity.mime.MultipartEntityBuilder;
+import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
 import org.junit.Test;
 
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
@@ -35,7 +38,7 @@ public class HttpTest {
 
         //get请求返回结果
         String str = "";
-        DefaultHttpClient client = new DefaultHttpClient();
+        CloseableHttpClient client = HttpClientBuilder.create().build();
         try {
             //发送get请求
             HttpGet httpGet = new HttpGet(url);
@@ -57,8 +60,43 @@ public class HttpTest {
             e.printStackTrace();
         }
         finally {
-            client.getConnectionManager().closeExpiredConnections();
-            client.getConnectionManager().closeIdleConnections(60, TimeUnit.SECONDS);
+            try {
+                client.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    @Test
+    public void getAndCookie(){
+
+        String url = "http://127.0.0.1:8083/dssp/getLoginUserInfo";
+        //get请求返回结果
+        String str = "";
+        CloseableHttpClient client = HttpClientBuilder.create().build();
+        try {
+            //发送get请求
+            HttpGet httpGet = new HttpGet(url);
+            httpGet.addHeader("Cookie", "SESSION=356fb6b1-5887-41e3-8bbf-42f1ca36b0ef");
+            HttpResponse response = client.execute(httpGet);
+            /**请求发送成功，并得到响应**/
+            if (response.getStatusLine().getStatusCode() == HttpStatus.SC_OK) {
+                /**读取服务器返回过来的json字符串数据**/
+                String result = EntityUtils.toString(response.getEntity());
+                System.out.println("请求成功 result + " + result);
+            }else{
+                System.out.println("get请求提交失败:" + url);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        finally {
+            try {
+                client.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 
@@ -72,7 +110,7 @@ public class HttpTest {
     public void post(){
 
         String url = "http://localhost:8080/bb";
-        DefaultHttpClient client = new DefaultHttpClient();
+        CloseableHttpClient client = HttpClientBuilder.create().build();
 
         String str = "";
         try {
@@ -95,8 +133,11 @@ public class HttpTest {
             e.printStackTrace();
         }
         finally {
-            client.getConnectionManager().closeExpiredConnections();
-            client.getConnectionManager().closeIdleConnections(60, TimeUnit.SECONDS);
+            try {
+                client.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 
@@ -104,7 +145,7 @@ public class HttpTest {
     public void post2(){
 
         String url = "http://localhost:8080/bb";
-        DefaultHttpClient client = new DefaultHttpClient();
+        CloseableHttpClient client = HttpClientBuilder.create().build();
 
         String str = "";
         try {
@@ -127,8 +168,11 @@ public class HttpTest {
             e.printStackTrace();
         }
         finally {
-            client.getConnectionManager().closeExpiredConnections();
-            client.getConnectionManager().closeIdleConnections(60, TimeUnit.SECONDS);
+            try {
+                client.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 
@@ -136,7 +180,7 @@ public class HttpTest {
     public void postJson(){
 
         String url = "http://localhost:8080/cc";
-        DefaultHttpClient client = new DefaultHttpClient();
+        CloseableHttpClient client = HttpClientBuilder.create().build();
 
         String str = "";
         try {
@@ -155,11 +199,12 @@ public class HttpTest {
             }
         } catch (Exception e) {
             e.printStackTrace();
-        }
-
-        finally {
-            client.getConnectionManager().closeExpiredConnections();
-            client.getConnectionManager().closeIdleConnections(60, TimeUnit.SECONDS);
+        } finally {
+            try {
+                client.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 
@@ -167,7 +212,7 @@ public class HttpTest {
     public void postUploadFile(){
 
         String url = "http://localhost:8080/fileUpload";
-        DefaultHttpClient client = new DefaultHttpClient();
+        CloseableHttpClient client = HttpClientBuilder.create().build();
 
         String str = "";
         try {
@@ -191,8 +236,11 @@ public class HttpTest {
             e.printStackTrace();
         }
         finally {
-            client.getConnectionManager().closeExpiredConnections();
-            client.getConnectionManager().closeIdleConnections(60, TimeUnit.SECONDS);
+            try {
+                client.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 

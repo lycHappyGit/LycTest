@@ -44,7 +44,7 @@
         	enableSelectByExample="false" enableUpdateByExample="false">
         </table>
        -->
-       <table tableName="invoice_warning" enableCountByExample="false"  enableDeleteByExample="false"
+       <table tableName="auth_info_user" enableCountByExample="false"  enableDeleteByExample="false"
               enableSelectByExample="false" enableUpdateByExample="false">
        </table>
     </context>

@@ -117,7 +117,8 @@ public class FtpUtil {
                 ftp.disconnect();
                 return result;
             }
-            ftp.changeWorkingDirectory(remotePath);// 转移到FTP服务器目录  
+            ftp.changeWorkingDirectory(remotePath);// 转移到FTP服务器目录
+//            InputStream in = ftp.retrieveFileStream(fileName);
             FTPFile[] fs = ftp.listFiles();
             for (FTPFile ff : fs) {
                 if (ff.getName().equals(fileName)) {
@@ -145,18 +146,15 @@ public class FtpUtil {
 
     public static void main(String[] args) throws FileNotFoundException {
 
-        String host = "10.1.1.109";
+        String host = "172.21.1.150";
         int port = 21;
-        String username = "admin";
-        String password = "admin123";
-        String basePath = "";
-        String filePath = "/lyc/123";
-        String filename = "lycTest2.jpg";
-        InputStream input = new FileInputStream(new File("d:/tmp/dd.jpg"));
-        boolean uploadFile = uploadFile(host, port, username, password, basePath, filePath, filename, input);
-        System.out.println("上传结果" + uploadFile);
-//		boolean uploadFile = downloadFile(host, port, username, password, "/Data/ftproot/lyc/123", "lycTest.jpg", "e:/");
-//		System.out.println("下载成功!");
+        String username = "zhou";
+        String password = "123456";
+        String filename = "ftp2.xlsx";
+        String remotePath = "/";
+        String localPath = "d:";
+        boolean b = downloadFile(host, port, username, password, remotePath, filename, localPath);
+        System.out.println("下载结果" + b);
     }
 
     @Test

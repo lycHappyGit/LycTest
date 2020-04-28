@@ -1,9 +1,6 @@
 package test;
 
-import bean.FPKJXX_FPTXX;
-import bean.FPKJXX_XMXX;
-import bean.REQUEST_FPKJXX;
-import bean.User;
+import bean.*;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.google.gson.Gson;
@@ -31,23 +28,18 @@ public class MyTest {
     @Test
     public void test1() {
 
-        String s = null;
-        QueueType fm = QueueType.UPLOAD;
-        switch (fm) {
-            case FM:
-                s = "a";
-                break;
-            case QZ:
-                s = "b";
-                break;
-            case TS:
-                s = "c";
-                break;
-            case UPLOAD:
-                s = "d";
-                break;
+        for(int i=1;i<=1000;i++){
+            boolean flag = true;
+            for(int j=2;j<= i/2-1;j++){
+                if(i%j == 0){
+                    flag = false;
+                    break;
+                }
+            }
+            if(flag){
+                System.out.print(i + " ");
+            }
         }
-        System.out.println(s);
     }
 
     @Test
@@ -77,15 +69,25 @@ public class MyTest {
     @Test
     public void test3() {
 
-        String money2cn = Money2CNUtil.money2CN(new BigDecimal("-200303123.12"));
-        System.out.println(money2cn);
+        Abean abean = new Abean();
+        abean.setA(" AND (name = 'COOLMETA')");
+        abean.setB("c");
+
+        System.out.println(JSON.toJSON(abean));
     }
 
     @Test
     public void test5() {
-        DecimalFormat shotDf = new DecimalFormat("#.00");
-        String s = shotDf.format(Double.parseDouble("50.00"));
-        System.out.println(s);
+       String cellValue = "45,56,58，85,85，62,65，65，56,56，656，66，5";
+        try{
+            cellValue = cellValue.replaceAll("，", ",");
+        }catch (Exception e){
+            throw new RuntimeException("共享目录模板导入异常: 错误的值 第" + 1 + "行,第" + 2 + "列");
+        }
+        System.out.println(Integer.MAX_VALUE);
+        System.out.println(Long.MAX_VALUE);
+        System.out.println(cellValue);
+
     }
 
     @Test
@@ -275,14 +277,11 @@ public class MyTest {
 
     @Test
     public void test() {
-        User user1 = new User("aa", "sing");
-        User user2 = new User("bb", "play");
-        ArrayList<User> users = new ArrayList<>();
-        users.add(user1);
-        users.add(user2);
-        System.out.println(JSON.toJSON(users));
-        users.get(users.size()-1).setLikes("");
-        System.out.println(JSON.toJSON(users));
+        String s = "/frantapi/cgqnt/get/a/b/cc/d";
+        int i = s.indexOf("/","/frantapi/".length());
+        System.out.println(i);
+        String result = s.substring(s.indexOf("/", "/frantapi/".length()), s.length());
+        System.out.println(result);
 
     }
 

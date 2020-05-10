@@ -288,12 +288,13 @@ public class MyTest {
     @Test
     public void test30() throws URISyntaxException {
 
-       String s = "https://localhost:28443/dgs/api_686979482438860800124104";
-        URI uri = new URI(s);
-        String host = uri.getHost();
-        int port = uri.getPort();
-        System.out.println("--------------" + uri.getScheme() + "://" + host + ":" + port);
-
+        StringBuffer sf = new StringBuffer("");
+        for(int i=1;i<=510;i++){
+          sf.append(1);
+        }
+        String s = sf.toString();
+        System.out.println(s);
+        System.out.println(s.length());
     }
 
 

@@ -2,10 +2,12 @@ package test;
 
 import bean.*;
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.google.gson.Gson;
 import enumtest.QueueType;
 import org.apache.commons.codec.digest.DigestUtils;
+import org.apache.http.Consts;
 import org.junit.Test;
 import util.JavaCompilerUtil;
 import util.Money2CNUtil;
@@ -17,9 +19,11 @@ import java.math.BigDecimal;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.security.MessageDigest;
+import java.sql.Timestamp;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.stream.Collectors;
 
 
 public class MyTest {
@@ -244,20 +248,8 @@ public class MyTest {
     }
 
     @Test
-    public void test19() throws Exception {
-//        List<String> list = new ArrayList<>();
-//        HashMap<String, List<String>> map = new HashMap<>();
-//        map.put("list", list);
-//        list.add("1");
-//        System.out.println(JSON.toJSONString(map));
-        String s = "123456";
-        MessageDigest md5 = MessageDigest.getInstance("MD5");
-        byte[] digest = md5.digest(s.getBytes("utf-8"));
-        String s1 = new String(digest, "utf-8");
-        byte[] encode = Base64.getEncoder().encode(digest);
-        String s2 = new String(encode, "utf-8");
-        System.out.println(s1);
-        System.out.println(s2);
+    public void test19() {
+        System.out.println(Consts.UTF_8.toString());
     }
 
     public static String signString(String data) {
@@ -277,25 +269,29 @@ public class MyTest {
 
     @Test
     public void test() {
-        String s = "/frantapi/cgqnt/get/a/b/cc/d";
-        int i = s.indexOf("/","/frantapi/".length());
-        System.out.println(i);
-        String result = s.substring(s.indexOf("/", "/frantapi/".length()), s.length());
-        System.out.println(result);
-
+        List<String> list = Arrays.asList("a", "b", "c", "d", "e", "f");
+        List<String> list1 = Arrays.asList("1,2,3,4,5,6".split(","));
+        List<String> list2 = list1.stream().filter(i -> Integer.parseInt(i) % 2 == 0).map(i -> i + "h").collect(Collectors.toList());
+        List<String> list3 = list1.stream().filter(i -> Integer.parseInt(i) % 2 == 0).map(i -> list.get(Integer.parseInt(i)- 1)).collect(Collectors.toList());
+        System.out.println(list1);
+        System.out.println(list2);
+        System.out.println(list3);
     }
 
     @Test
-    public void test30() throws URISyntaxException {
-
-        StringBuffer sf = new StringBuffer("");
-        for(int i=1;i<=510;i++){
-          sf.append(1);
-        }
-        String s = sf.toString();
-        System.out.println(s);
-        System.out.println(s.length());
+    public void test30() {
+        String s = "{\"b\":1,\"h\":2,\"f\":3,\"e\":4,\"g\":5,\"i\":\"2020-05-26 14:53:22\",\"j\":\"1590476253167\",\"k\":\"2020-05-12T06:52:55.000+0000\"}";
+        JSONObject jsonObject = JSON.parseObject(s);
+        Date i1 = jsonObject.getDate("i");
+        Timestamp i2 = jsonObject.getTimestamp("i");
+        System.out.println(i1 + " " + i2);
+        Date i3 = jsonObject.getDate("j");
+        Timestamp i4 = jsonObject.getTimestamp("j");
+        java.sql.Date j = jsonObject.getSqlDate("j");
+        System.out.println(i3 + " " + i4 + " " + j);
+        Timestamp k1 = jsonObject.getTimestamp("k");
+        java.sql.Date k2 = jsonObject.getSqlDate("k");
+        System.out.println(k1 + " " + k2);
     }
-
 
 }

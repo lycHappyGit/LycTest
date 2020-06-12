@@ -23,6 +23,7 @@ import java.sql.Timestamp;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.stream.Collectors;
 
 
@@ -280,7 +281,7 @@ public class MyTest {
 
     @Test
     public void test30() {
-        String s = "{\"b\":1,\"h\":2,\"f\":3,\"e\":4,\"g\":5,\"i\":\"2020-05-26 14:53:22\",\"j\":\"1590476253167\",\"k\":\"2020-05-12T06:52:55.000+0000\"}";
+        String s = "{\"b\":1,\"h\":2,\"f\":3,\"e\":4,\"g\":5,\"i\":\"2020-05-26 14:53:22\",\"j\":\"1590476253167\",\"k\":\"2020-05-12T06:52:55.000+0000\",\"l\":0,\"m\":\"true\"}";
         JSONObject jsonObject = JSON.parseObject(s);
         Date i1 = jsonObject.getDate("i");
         Timestamp i2 = jsonObject.getTimestamp("i");
@@ -292,6 +293,14 @@ public class MyTest {
         Timestamp k1 = jsonObject.getTimestamp("k");
         java.sql.Date k2 = jsonObject.getSqlDate("k");
         System.out.println(k1 + " " + k2);
+        Boolean l = jsonObject.getBoolean("l");
+        Boolean m = jsonObject.getBoolean("m");
+        System.out.println("boolean 0 --> " + l + " boolean true --> " + m);
+    }
+
+    @Test
+    public void test31() {
+        AtomicBoolean a = new AtomicBoolean(true);
     }
 
 }

@@ -1,19 +1,22 @@
 package poi;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.util.Iterator;
-import java.util.List;
-
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
+import com.mlamp.rcsc.model.RcGxmlTemplate;
 import org.apache.poi.hssf.usermodel.HSSFCell;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.util.CellUtil;
+import org.apache.poi.xssf.usermodel.*;
+import org.junit.Test;
 
-import com.alibaba.fastjson.JSONArray;
-import com.alibaba.fastjson.JSONObject;
+import java.io.*;
+import java.text.DecimalFormat;
+import java.util.Iterator;
+import java.util.List;
 
 public class PoiTest {
 
@@ -54,5 +57,94 @@ public class PoiTest {
 			}
 		}
 
+	}
+
+	@Test
+	public void read() throws Exception {
+		FileInputStream fis = new FileInputStream("D:/mlamp/gxml_list_template.xlsx");
+		XSSFWorkbook sheets = new XSSFWorkbook(fis);
+		XSSFSheet sheetAt = sheets.getSheetAt(0);
+		for(Row row : sheetAt){
+			int i = 0;
+			for(Cell cell : row){
+				String cellValue = getCellValue(cell, row.getRowNum() + 1, i + 1);
+//				String cellValue = cell.getStringCellValue();
+				i++;
+				System.out.print("---------\t" + cellValue);
+			}
+			System.out.println();
+		}
+		fis.close();
+		sheets.close();
+	}
+
+	@Test
+	public void write() throws Exception{
+		XSSFWorkbook sheets = new XSSFWorkbook();
+		XSSFSheet sheet = sheets.createSheet();
+		XSSFDrawing drawingPatriarch = sheet.createDrawingPatriarch();
+		XSSFRow row = sheet.createRow(0);
+		int i = 0;
+		//添加 共享类目 管理域
+		XSSFCell cell1 = row.createCell(i);
+		cell1.setCellValue("共享类目");
+		XSSFComment comment = drawingPatriarch.createCellComment(new XSSFClientAnchor(0, 0, 0,0, (short) 1, 1, (short) 10, 10));
+		comment.setString(new XSSFRichTextString("类型:1\n共享类目批注"));
+		cell1.setCellComment(comment);
+		i++;
+		XSSFCell cell2 = row.createCell(i);
+		cell2.setCellValue("管理域");
+		XSSFComment comment2 = drawingPatriarch.createCellComment(new XSSFClientAnchor(0, 0, 0,0, (short) 3, 1, (short) 3, 1));
+		comment2.setString(new XSSFRichTextString("管理域批注"));
+		cell2.setCellComment(comment2);
+
+		System.out.println("------------------------lastCellNum: "+row.getLastCellNum());
+
+		FileOutputStream fos = new FileOutputStream("D:/aa/1.xlsx");
+		sheets.write(fos);
+		sheets.close();
+		fos.close();
+	}
+
+	/**
+	 * 读取单元格的值
+	 * @param cell
+	 * @param rowNum
+	 * @param colNum
+	 * @return
+	 */
+	private String getCellValue(Cell cell, int rowNum, int colNum) {
+		String cellValue = null;
+		if (cell == null) {
+			return cellValue;
+		}
+		//判断数据的类型
+		switch (cell.getCellTypeEnum()) {
+			case NUMERIC:
+				double numericCellValue = cell.getNumericCellValue();
+				String format = new DecimalFormat("#").format(numericCellValue);
+				if(Long.parseLong(format) == numericCellValue){
+					cellValue = format;
+				}else{
+					cellValue = String.valueOf(numericCellValue);
+				}
+				break;
+			case STRING:
+				cellValue = String.valueOf(cell.getStringCellValue());
+				break;
+			case BOOLEAN:
+				cellValue = String.valueOf(cell.getBooleanCellValue());
+				break;
+			case FORMULA:
+				cellValue = String.valueOf(cell.getCellFormula());
+				break;
+			case BLANK:
+				cellValue = "";
+				break;
+			case ERROR:
+			default:
+				throw new RuntimeException("共享目录批量导入异常: 错误的值 第" + rowNum + "行,第" + colNum + "列");
+		}
+		return cellValue;
 	}
 }

@@ -1,32 +1,32 @@
 package test;
 
-import bean.*;
+import bean.Abean;
+import bean.FPKJXX_FPTXX;
+import bean.FPKJXX_XMXX;
+import bean.REQUEST_FPKJXX;
 import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.google.gson.Gson;
-import enumtest.QueueType;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.http.Consts;
 import org.junit.Test;
+import org.springframework.util.AntPathMatcher;
 import util.JavaCompilerUtil;
-import util.Money2CNUtil;
 
 import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
 import java.io.*;
 import java.math.BigDecimal;
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.security.MessageDigest;
 import java.sql.Timestamp;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.*;
-import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import java.util.stream.Collectors;
 
-
+@Slf4j
 public class MyTest {
 
 
@@ -300,7 +300,28 @@ public class MyTest {
 
     @Test
     public void test31() {
-        AtomicBoolean a = new AtomicBoolean(true);
+        AntPathMatcher antPathMatcher = new AntPathMatcher();
+        Comparator<String> patternComparator = antPathMatcher.getPatternComparator("/aa/bb/dd/ee");
+        boolean match = antPathMatcher.match("/aa/bb/{cc}", "/aa/bb/dd");
+        List<String> list = Arrays.asList("/aa/bb/{cc},/aa/bb/dd".split(","));
+        System.out.println("list1:" + list);
+        Collections.sort(list,patternComparator);
+        System.out.println(match);
+        System.out.println("list2" + list);
     }
 
+    @Test
+    public void test32() throws IOException {
+
+        String gxmlListTempalte_path = "D:/aa/bb/gxml.xlsx";
+        String fileName = gxmlListTempalte_path.substring(gxmlListTempalte_path.lastIndexOf("/") + 1, gxmlListTempalte_path.length());
+        System.out.println(fileName);
+    }
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("请输入字符!");
+        String s = scanner.nextLine();
+        System.out.println("you write is : " + s);
+    }
 }

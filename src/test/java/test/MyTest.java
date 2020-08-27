@@ -324,5 +324,6 @@ public class MyTest {
         String s = scanner.nextLine();
         System.out.println("you write is : " + s);
         System.out.println(3);
+        System.out.println(4);
     }
 }

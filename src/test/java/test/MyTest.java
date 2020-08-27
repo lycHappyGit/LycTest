@@ -316,7 +316,6 @@ public class MyTest {
         String gxmlListTempalte_path = "D:/aa/bb/gxml.xlsx";
         String fileName = gxmlListTempalte_path.substring(gxmlListTempalte_path.lastIndexOf("/") + 1, gxmlListTempalte_path.length());
         System.out.println(fileName);
-        System.out.println(5);
     }
 
     public static void main(String[] args) {

@@ -323,5 +323,6 @@ public class MyTest {
         System.out.println("请输入字符!");
         String s = scanner.nextLine();
         System.out.println("you write is : " + s);
+        System.out.println(3);
     }
 }

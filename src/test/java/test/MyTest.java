@@ -308,6 +308,7 @@ public class MyTest {
         Collections.sort(list,patternComparator);
         System.out.println(match);
         System.out.println("list2" + list);
+        System.out.println(6);
     }
 
     @Test

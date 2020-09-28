@@ -313,15 +313,12 @@ public class MyTest {
     @Test
     public void test32() throws IOException {
 
-        String gxmlListTempalte_path = "D:/aa/bb/gxml.xlsx";
-        String fileName = gxmlListTempalte_path.substring(gxmlListTempalte_path.lastIndexOf("/") + 1, gxmlListTempalte_path.length());
-        System.out.println(fileName);
+        Abean abean = new Abean();
+        abean.setC(true);
+        Boolean c = abean.getC();
+        System.out.println(c);
+        System.out.println(c==true);
+        System.out.println(c!=false);
     }
 
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("请输入字符!");
-        String s = scanner.nextLine();
-        System.out.println("you write is : " + s);
-    }
 }

@@ -8,4 +8,6 @@ public class Abean {
     private String a;
 
     private String b;
+
+    private Boolean c;
 }

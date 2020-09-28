@@ -2,13 +2,14 @@ package poi;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import com.mlamp.rcsc.model.RcGxmlTemplate;
 import org.apache.poi.hssf.usermodel.HSSFCell;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.util.CellUtil;
 import org.apache.poi.xssf.usermodel.*;
 import org.junit.Test;
@@ -146,5 +147,37 @@ public class PoiTest {
 				throw new RuntimeException("共享目录批量导入异常: 错误的值 第" + rowNum + "行,第" + colNum + "列");
 		}
 		return cellValue;
+	}
+
+	@Test
+	public void test() throws Exception {
+
+		Workbook sheets = new HSSFWorkbook();
+		Sheet sheet = sheets.createSheet("lycSheet");
+		Row row = sheet.createRow(0);
+		Cell cell = row.createCell(0);
+		cell.setCellValue("lycTest");
+		Cell cell2 = row.createCell(1);
+		cell2.setCellValue("lycTest2");
+		FileOutputStream fos = new FileOutputStream("D:/aa/1.xls");
+		sheets.write(fos);
+		fos.close();
+		sheets.close();
+	}
+
+	@Test
+	public void test2() throws Exception {
+
+		FileInputStream fis = new FileInputStream("D:/aa/gxml_list_template.xlsx");
+		Workbook sheets = new XSSFWorkbook(fis);
+		Sheet sheet = sheets.getSheetAt(0);
+		short lastCellNum = sheet.getRow(0).getLastCellNum();
+		for(Row row : sheet){
+			int rowNum = row.getRowNum();
+			System.out.println("lastCellNum is : " + lastCellNum + "rowNum is : " + rowNum);
+			for(Cell cell : row){
+				System.out.print(getCellValue(row.getCell(lastCellNum-1), 1, 1));
+			}
+		}
 	}
 }

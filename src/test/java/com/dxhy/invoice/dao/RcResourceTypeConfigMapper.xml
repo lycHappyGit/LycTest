@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dxhy.invoice.dao.RcResourceTypeConfigMapper" >
+  <resultMap id="BaseResultMap" type="com.dxhy.invoice.entity.RcResourceTypeConfig" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="resource_type" property="resourceType" jdbcType="VARCHAR" />
+    <result column="resource_type_name" property="resourceTypeName" jdbcType="VARCHAR" />
+    <result column="useTemplate" property="usetemplate" jdbcType="BIT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, resource_type, resource_type_name, useTemplate
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from rc_resource_type_config
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from rc_resource_type_config
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.dxhy.invoice.entity.RcResourceTypeConfig" >
+    insert into rc_resource_type_config (id, resource_type, resource_type_name, 
+      useTemplate)
+    values (#{id,jdbcType=INTEGER}, #{resourceType,jdbcType=VARCHAR}, #{resourceTypeName,jdbcType=VARCHAR}, 
+      #{usetemplate,jdbcType=BIT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.dxhy.invoice.entity.RcResourceTypeConfig" >
+    insert into rc_resource_type_config
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="resourceType != null" >
+        resource_type,
+      </if>
+      <if test="resourceTypeName != null" >
+        resource_type_name,
+      </if>
+      <if test="usetemplate != null" >
+        useTemplate,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="resourceType != null" >
+        #{resourceType,jdbcType=VARCHAR},
+      </if>
+      <if test="resourceTypeName != null" >
+        #{resourceTypeName,jdbcType=VARCHAR},
+      </if>
+      <if test="usetemplate != null" >
+        #{usetemplate,jdbcType=BIT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.dxhy.invoice.entity.RcResourceTypeConfig" >
+    update rc_resource_type_config
+    <set >
+      <if test="resourceType != null" >
+        resource_type = #{resourceType,jdbcType=VARCHAR},
+      </if>
+      <if test="resourceTypeName != null" >
+        resource_type_name = #{resourceTypeName,jdbcType=VARCHAR},
+      </if>
+      <if test="usetemplate != null" >
+        useTemplate = #{usetemplate,jdbcType=BIT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.dxhy.invoice.entity.RcResourceTypeConfig" >
+    update rc_resource_type_config
+    set resource_type = #{resourceType,jdbcType=VARCHAR},
+      resource_type_name = #{resourceTypeName,jdbcType=VARCHAR},
+      useTemplate = #{usetemplate,jdbcType=BIT}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

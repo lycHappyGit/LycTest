@@ -7,6 +7,7 @@ import bean.REQUEST_FPKJXX;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.google.gson.Gson;
+import https.HttpsClientUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.http.Consts;
@@ -22,8 +23,6 @@ import java.sql.Timestamp;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.*;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 import java.util.stream.Collectors;
 
 @Slf4j
@@ -312,13 +311,8 @@ public class MyTest {
 
     @Test
     public void test32() throws IOException {
-
-        Abean abean = new Abean();
-        abean.setC(true);
-        Boolean c = abean.getC();
-        System.out.println(c);
-        System.out.println(c==true);
-        System.out.println(c!=false);
+        String s = HttpsClientUtil.get("https://localhost:10001/lyc-web3/test1?name=3");
+        System.out.println("================" + s);
     }
 
 }

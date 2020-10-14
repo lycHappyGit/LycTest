@@ -44,8 +44,11 @@
         	enableSelectByExample="false" enableUpdateByExample="false">
         </table>
        -->
-       <table tableName="rc_resource_type_config" enableCountByExample="false"  enableDeleteByExample="false"
+       <table tableName="api_control" enableCountByExample="false"  enableDeleteByExample="false"
               enableSelectByExample="false" enableUpdateByExample="false">
        </table>
+        <table tableName="api_control_mapping" enableCountByExample="false"  enableDeleteByExample="false"
+               enableSelectByExample="false" enableUpdateByExample="false">
+        </table>
     </context>
 </generatorConfiguration>  

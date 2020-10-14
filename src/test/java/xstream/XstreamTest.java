@@ -49,6 +49,7 @@ public class XstreamTest {
         //启用注解
         xStream.processAnnotations(User.class);
         String s = xStream.toXML(user);
+        System.out.println(JSON.toJSONString(user));
         System.out.println(s);
     }
 

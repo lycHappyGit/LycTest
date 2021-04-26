@@ -1,12 +1,17 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <configuration scan="true" scanPeriod="5 seconds" debug="true">
-	<property name="contextName" value="PushIdKey" />
+	<property name="contextName" value="/lycTest" />
 	<property name="maxHistory" value="10" />
 	<property name="maxFileSize" value="50MB" />
 	<property name="pattern" value="%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} [%line]- %msg%n " />
-	<property name="logFilePath" value="D:/logs/" />
+	<property name="logFilePath" value="D:/logs" />
 	<contextName>${contextName}</contextName>
 	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+		<filter class="ch.qos.logback.classic.filter.LevelFilter">
+			<level>INFO</level>
+			<onMatch>ACCEPT</onMatch>
+			<onMismatch>DENY</onMismatch>
+		</filter>
 		<encoder>
 			<pattern>${pattern}</pattern>
 		</encoder>

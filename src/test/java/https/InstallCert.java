@@ -67,7 +67,7 @@ public class InstallCert {
 //            return;
 //        }
 
-        host = "172.21.1.231";
+        host = "172.21.1.138";
         port = 20100;
         String p = "changeit";
         passphrase = p.toCharArray();

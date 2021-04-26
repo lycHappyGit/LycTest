@@ -5,12 +5,13 @@ import bean.FPKJXX_FPTXX;
 import bean.FPKJXX_XMXX;
 import bean.REQUEST_FPKJXX;
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.google.gson.Gson;
-import https.HttpsClientUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.http.Consts;
+import org.apache.http.client.utils.URIBuilder;
 import org.junit.Test;
 import org.springframework.util.AntPathMatcher;
 import util.JavaCompilerUtil;
@@ -19,6 +20,7 @@ import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
 import java.io.*;
 import java.math.BigDecimal;
+import java.net.URISyntaxException;
 import java.sql.Timestamp;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
@@ -310,9 +312,67 @@ public class MyTest {
     }
 
     @Test
-    public void test32() throws IOException {
-        String s = HttpsClientUtil.get("https://localhost:10001/lyc-web3/test1?name=3");
-        System.out.println("================" + s);
+    public void test32() throws Exception {
+        String name = "admin";
+        System.out.println(name.split(",").length);
+        String[] aa = {};
     }
 
+    @Test
+    public void test33() throws Exception {
+//        String url = "https://106.52.241.248/api/role/findAllRoles?pageIndex=0&pageSize=10000";
+        String url = "https://123.207.124.101:443/api/role/findAllUsersWithRoles?pageIndex=0&pageSize=2&name=theory_test_006%2Ctheory_test_007";
+        String result = AccessUtils.doGet(url);
+        System.out.println(result);
+    }
+
+    @Test
+    public void aa() throws Exception {
+
+        URIBuilder uriBuilder = new URIBuilder("https://123.207.124.101:443/api/role/findAllUsersWithRoles?pageIndex=0&pageSize=100");
+        uriBuilder.setParameter("pageIndex","1");
+        uriBuilder.setParameter("pageSize","99");
+        uriBuilder.setParameter("name","admin,babo");
+        String url = uriBuilder.build().toString();
+        String result = AccessUtils.doGet(url);
+        System.out.println(result);
+    }
+
+    @Test
+    public void test34() throws Exception {
+
+        String s = "{\"message\": \"successed\", \"data\": {\"totalCount\": 2, \"pageDatas\": [{\"glossary\": {\"guid\": 185, \"displayText\": \"catalog_dssp\", \"description\": \"catalog_dssp glossary\"}, \"terms\": [{\"guid\": 6805, \"displayText\": \"dssp_shareCatalog_1000000376509955\", \"description\": \"临时救助\\n信息\"}, {\"guid\": 6826, \"displayText\": \"dssp_shareCatalog_1000000516379485\", \"description\": \"临时救助\\n信息\"}, {\"guid\": 7208, \"displayText\": \"dssp_shareCatalog_1000000536860729\", \"description\": \"临时救助\\n信息\"}, {\"guid\": 6825, \"displayText\": \"dssp_shareCatalog_1000001324763280\", \"description\": \"临时救助\\n信息\"}, {\"guid\": 7228, \"displayText\": \"dssp_shareCatalog_1000001343288906\", \"description\": \"临时救助\\n信息\"}, {\"guid\": 7227, \"displayText\": \"dssp_shareCatalog_1000001401737005\", \"description\": \"临时救助\\n信息\"}, {\"guid\": 7149, \"displayText\": \"dssp_shareCatalog_1000002045918591\", \"description\": \"ces-ww\"} ] }, {\"glossary\": {\"guid\": 145, \"displayText\": \"dssp\", \"description\": \"dssp glossary\"}, \"terms\": [{\"guid\": 146, \"displayText\": \"dssp/share/未分配目录\", \"description\": \"dssp/share/未分配目录\"}, {\"guid\": 342, \"displayText\": \"dssp/未分配目录\", \"description\": \"dssp的未分配目录\"}, {\"guid\": 836, \"displayText\": \"share.基础信息资源\", \"description\": \"\"}, {\"guid\": 928, \"displayText\": \"share.基础信息资源.人口信息库\", \"description\": \"\"}, {\"guid\": 868, \"displayText\": \"share.基础信息资源.宏观经济库\", \"description\": \"\"}, {\"guid\": 757, \"displayText\": \"share.基础信息资源.法人信息库\", \"description\": \"\"}, {\"guid\": 775, \"displayText\": \"share.基础信息资源.空间地理库\", \"description\": \"\"}, {\"guid\": 801, \"displayText\": \"share.部门信息资源\", \"description\": \"\"}, {\"guid\": 845, \"displayText\": \"share.部门信息资源.区交通运输局\", \"description\": \"\"}, {\"guid\": 522, \"displayText\": \"share.部门信息资源.区人力资源和社会保障局\", \"description\": \"\"}, {\"guid\": 818, \"displayText\": \"share.部门信息资源.区人民政府国有资产监督管理局\", \"description\": \"\"}, {\"guid\": 883, \"displayText\": \"share.部门信息资源.区住房和城乡建设局\", \"description\": \"\"}, {\"guid\": 821, \"displayText\": \"share.部门信息资源.区公安分局\", \"description\": \"\"}, {\"guid\": 742, \"displayText\": \"share.部门信息资源.区农业农村局\", \"description\": \"\"}, {\"guid\": 923, \"displayText\": \"share.部门信息资源.区医疗保障局\", \"description\": \"\"}, {\"guid\": 702, \"displayText\": \"share.部门信息资源.区卫生健康局\", \"description\": \"\"}, {\"guid\": 521, \"displayText\": \"share.部门信息资源.区发展和改革局\", \"description\": \"\"}, {\"guid\": 846, \"displayText\": \"share.部门信息资源.区司法局\", \"description\": \"\"}, {\"guid\": 924, \"displayText\": \"share.部门信息资源.区商务局\", \"description\": \"\"}, {\"guid\": 820, \"displayText\": \"share.部门信息资源.区园林和林业局\", \"description\": \"\"}, {\"guid\": 830, \"displayText\": \"share.部门信息资源.区城市管理执法局\", \"description\": \"\"}, {\"guid\": 844, \"displayText\": \"share.部门信息资源.区委员会政法委员会\", \"description\": \"\"}, {\"guid\": 903, \"displayText\": \"share.部门信息资源.区委机构编制委员会办公室\", \"description\": \"\"}, {\"guid\": 819, \"displayText\": \"share.部门信息资源.区审计局\", \"description\": \"\"}, {\"guid\": 904, \"displayText\": \"share.部门信息资源.区市场监督管理局\", \"description\": \"\"}, {\"guid\": 863, \"displayText\": \"share.部门信息资源.区应急管理局\", \"description\": \"\"}, {\"guid\": 622, \"displayText\": \"share.部门信息资源.区教育局\", \"description\": \"\"}, {\"guid\": 753, \"displayText\": \"share.部门信息资源.区文化和旅游局\", \"description\": \"\"}, {\"guid\": 6785, \"displayText\": \"share.部门信息资源.区民政局\", \"description\": \"\"}, {\"guid\": 831, \"displayText\": \"share.部门信息资源.区水务和湖泊局\", \"description\": \"\"}, {\"guid\": 771, \"displayText\": \"share.部门信息资源.区消防救援大队\", \"description\": \"\"}, {\"guid\": 752, \"displayText\": \"share.部门信息资源.区科学技术和经济信息化局\", \"description\": \"\"}, {\"guid\": 886, \"displayText\": \"share.部门信息资源.区税务局\", \"description\": \"\"}, {\"guid\": 885, \"displayText\": \"share.部门信息资源.区统计局\", \"description\": \"\"}, {\"guid\": 905, \"displayText\": \"share.部门信息资源.区自然资源和规划局\", \"description\": \"\"}, {\"guid\": 520, \"displayText\": \"share.部门信息资源.区行政审批局\", \"description\": \"\"}, {\"guid\": 847, \"displayText\": \"share.部门信息资源.区财政局\", \"description\": \"\"}, {\"guid\": 906, \"displayText\": \"share.部门信息资源.区退役军人事务局\", \"description\": \"\"}, {\"guid\": 770, \"displayText\": \"share.部门信息资源.生态环境局江夏区分局\", \"description\": \"\"}, {\"guid\": 849, \"displayText\": \"区交通运输局-管理域\", \"description\": \"\"}, {\"guid\": 889, \"displayText\": \"区人力资源和社会保障局-管理域\", \"description\": \"\"}, {\"guid\": 944, \"displayText\": \"区人民政府国有资产监督管理局-管理域\", \"description\": \"\"}, {\"guid\": 907, \"displayText\": \"区住房和城乡建设局-管理域\", \"description\": \"\"}, {\"guid\": 964, \"displayText\": \"区公安分局-管理域\", \"description\": \"\"}, {\"guid\": 943, \"displayText\": \"区农业农村局-管理域\", \"description\": \"\"}, {\"guid\": 945, \"displayText\": \"区医疗保障局-管理域\", \"description\": \"\"}, {\"guid\": 754, \"displayText\": \"区卫生健康局-管理域\", \"description\": \"\"}, {\"guid\": 834, \"displayText\": \"区发展和改革局-管理域\", \"description\": \"\"}, {\"guid\": 773, \"displayText\": \"区司法局-管理域\", \"description\": \"\"}, {\"guid\": 867, \"displayText\": \"区商务局-管理域\", \"description\": \"\"}, {\"guid\": 927, \"displayText\": \"区园林和林业局-管理域\", \"description\": \"\"}, {\"guid\": 832, \"displayText\": \"区城市管理执法局-管理域\", \"description\": \"\"}, {\"guid\": 772, \"displayText\": \"区委员会政法委员会-管理域\", \"description\": \"\"}, {\"guid\": 926, \"displayText\": \"区委机构编制委员会办公室-管理域\", \"description\": \"\"}, {\"guid\": 866, \"displayText\": \"区审计局-管理域\", \"description\": \"\"}, {\"guid\": 963, \"displayText\": \"区市场监督管理局-管理域\", \"description\": \"\"}, {\"guid\": 865, \"displayText\": \"区应急管理局-管理域\", \"description\": \"\"}, {\"guid\": 864, \"displayText\": \"区教育局-管理域\", \"description\": \"\"}, {\"guid\": 888, \"displayText\": \"区文化和旅游局-管理域\", \"description\": \"\"}, {\"guid\": 6765, \"displayText\": \"区民政局-管理域\", \"description\": \"\"}, {\"guid\": 848, \"displayText\": \"区水务和湖泊局-管理域\", \"description\": \"\"}, {\"guid\": 822, \"displayText\": \"区消防救援大队-管理域\", \"description\": \"\"}, {\"guid\": 833, \"displayText\": \"区科学技术和经济信息化局-管理域\", \"description\": \"\"}, {\"guid\": 890, \"displayText\": \"区税务局-管理域\", \"description\": \"\"}, {\"guid\": 835, \"displayText\": \"区统计局-管理域\", \"description\": \"\"}, {\"guid\": 850, \"displayText\": \"区自然资源和规划局-管理域\", \"description\": \"\"}, {\"guid\": 887, \"displayText\": \"区行政审批局-管理域\", \"description\": \"\"}, {\"guid\": 756, \"displayText\": \"区财政局-管理域\", \"description\": \"\"}, {\"guid\": 774, \"displayText\": \"区退役军人事务局-管理域\", \"description\": \"\"}, {\"guid\": 925, \"displayText\": \"生态环境局江夏区分局-管理域\", \"description\": \"\"} ] } ], \"fieldInfos\": [] }, \"statusCode\": 200 }";
+        JSONArray jsonArray = JSON.parseObject(s).getJSONObject("data").getJSONArray("pageDatas").getJSONObject(1).getJSONArray("terms");
+        ArrayList<Integer> idList = new ArrayList<>();
+        for(int i=0;i<jsonArray.size();i++){
+            Integer guid = jsonArray.getJSONObject(i).getInteger("guid");
+            idList.add(guid);
+        }
+        List<Integer> collect = idList.stream().sorted().collect(Collectors.toList());
+        System.out.println(JSON.toJSONString(collect));
+    }
+
+    @Test
+    public void test35() throws Exception {
+        int n = 36;
+        for(int i=1;i<=n;i++){
+            for(int j=1;j<=n-i;j++){
+                System.out.print(" ");
+            }
+            for(int k=1;k<=2*i-1;k++){
+                System.out.print("*");
+            }
+            System.out.println();
+        }
+    }
+
+    @Test
+    public void test36() throws Exception {
+        List<Integer> list = new ArrayList<>();
+        list.add(1);
+        list.add(2);
+        list.add(3);
+        list.remove(1);
+        System.out.println(list.get(1));
+    }
 }

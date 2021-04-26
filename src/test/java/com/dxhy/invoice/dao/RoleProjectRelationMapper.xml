@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dxhy.invoice.dao.RoleProjectRelationMapper" >
+  <resultMap id="BaseResultMap" type="com.dxhy.invoice.entity.RoleProjectRelation" >
+    <id column="role_project_id" property="roleProjectId" jdbcType="INTEGER" />
+    <result column="role_id" property="roleId" jdbcType="INTEGER" />
+    <result column="project_id" property="projectId" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    role_project_id, role_id, project_id
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from role_project_relation
+    where role_project_id = #{roleProjectId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from role_project_relation
+    where role_project_id = #{roleProjectId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.dxhy.invoice.entity.RoleProjectRelation" >
+    insert into role_project_relation (role_project_id, role_id, project_id
+      )
+    values (#{roleProjectId,jdbcType=INTEGER}, #{roleId,jdbcType=INTEGER}, #{projectId,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.dxhy.invoice.entity.RoleProjectRelation" >
+    insert into role_project_relation
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="roleProjectId != null" >
+        role_project_id,
+      </if>
+      <if test="roleId != null" >
+        role_id,
+      </if>
+      <if test="projectId != null" >
+        project_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="roleProjectId != null" >
+        #{roleProjectId,jdbcType=INTEGER},
+      </if>
+      <if test="roleId != null" >
+        #{roleId,jdbcType=INTEGER},
+      </if>
+      <if test="projectId != null" >
+        #{projectId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.dxhy.invoice.entity.RoleProjectRelation" >
+    update role_project_relation
+    <set >
+      <if test="roleId != null" >
+        role_id = #{roleId,jdbcType=INTEGER},
+      </if>
+      <if test="projectId != null" >
+        project_id = #{projectId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where role_project_id = #{roleProjectId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.dxhy.invoice.entity.RoleProjectRelation" >
+    update role_project_relation
+    set role_id = #{roleId,jdbcType=INTEGER},
+      project_id = #{projectId,jdbcType=INTEGER}
+    where role_project_id = #{roleProjectId,jdbcType=INTEGER}
+  </update>
+</mapper>

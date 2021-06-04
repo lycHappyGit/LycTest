@@ -8,7 +8,7 @@
 	<properties>
 		<cxf-version>3.0.4</cxf-version>
 		<neethi-version>3.0.1</neethi-version>
-		<apache-httpclient>4.5.1</apache-httpclient>
+		<apache-httpclient>4.5.13</apache-httpclient>
 		<apache-httpcore>4.4.3</apache-httpcore>
 		<apache-httpmime>4.5.3</apache-httpmime>
 	</properties>

@@ -44,7 +44,7 @@
         	enableSelectByExample="false" enableUpdateByExample="false">
         </table>
        -->
-       <table tableName="role_project_relation" enableCountByExample="false"  enableDeleteByExample="false"
+       <table tableName="t_rule" enableCountByExample="false"  enableDeleteByExample="false"
               enableSelectByExample="false" enableUpdateByExample="false">
        </table>
     </context>

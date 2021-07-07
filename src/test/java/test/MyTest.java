@@ -313,9 +313,8 @@ public class MyTest {
 
     @Test
     public void test32() throws Exception {
-        String name = "admin";
-        System.out.println(name.split(",").length);
-        String[] aa = {};
+        String s = "IF(tag_name = 'dssp_gxmlmb_tag1', item_value, null) AS 'dssp_gxmlmb_tag1',IF(tag_name = 'dssp_gxmlmb_tag10', item_value, null) AS 'dssp_gxmlmb_tag10',IF(tag_name = 'dssp_gxmlmb_tag11', item_value, null) AS 'dssp_gxmlmb_tag11',IF(tag_name = 'dssp_gxmlmb_tag12', item_value, null) AS 'dssp_gxmlmb_tag12',IF(tag_name = 'dssp_gxmlmb_tag13', item_value, null) AS 'dssp_gxmlmb_tag13',IF(tag_name = 'dssp_gxmlmb_tag14', item_value, null) AS 'dssp_gxmlmb_tag14',IF(tag_name = 'dssp_gxmlmb_tag15', item_value, null) AS 'dssp_gxmlmb_tag15',IF(tag_name = 'dssp_gxmlmb_tag16', item_value, null) AS 'dssp_gxmlmb_tag16',IF(tag_name = 'dssp_gxmlmb_tag17', item_value, null) AS 'dssp_gxmlmb_tag17',IF(tag_name = 'dssp_gxmlmb_tag18', item_value, null) AS 'dssp_gxmlmb_tag18',IF(tag_name = 'dssp_gxmlmb_tag19', item_value, null) AS 'dssp_gxmlmb_tag19',IF(tag_name = 'dssp_gxmlmb_tag2', item_value, null) AS 'dssp_gxmlmb_tag2',IF(tag_name = 'dssp_gxmlmb_tag20', item_value, null) AS 'dssp_gxmlmb_tag20',IF(tag_name = 'dssp_gxmlmb_tag3', item_v";
+        System.out.println(s.length());
     }
 
     @Test
@@ -368,11 +367,10 @@ public class MyTest {
 
     @Test
     public void test36() throws Exception {
-        List<Integer> list = new ArrayList<>();
-        list.add(1);
-        list.add(2);
-        list.add(3);
-        list.remove(1);
-        System.out.println(list.get(1));
+        List<String> list = new ArrayList<>();
+        list.add("ab");
+        list.add("cd");
+        list.add("ef");
+        System.out.println(JSON.toJSONString(list));
     }
 }

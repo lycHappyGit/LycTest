@@ -6,7 +6,7 @@
 	<version>0.0.1-SNAPSHOT</version>
 
 	<properties>
-		<cxf-version>3.0.4</cxf-version>
+		<cxf-version>3.1.14</cxf-version>
 		<neethi-version>3.0.1</neethi-version>
 		<apache-httpclient>4.5.1</apache-httpclient>
 		<apache-httpcore>4.4.3</apache-httpcore>
